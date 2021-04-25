@@ -69,6 +69,13 @@ func WithRoutes() Option {
 	}
 }
 
+// WithCapsman enables CAP client registrations
+func WithCapsman() Option {
+        return func(c *collector) {
+                c.collectors = append(c.collectors, newCAPSManCollector())
+        }
+}
+
 // WithDHCP enables DHCP serrver metrics
 func WithDHCP() Option {
 	return func(c *collector) {

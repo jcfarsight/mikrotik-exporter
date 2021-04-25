@@ -37,6 +37,7 @@ var (
 	ver         = flag.Bool("version", false, "find the version of binary")
 
 	withBgp       = flag.Bool("with-bgp", false, "retrieves BGP routing infrormation")
+	withCapsman   = flag.Bool("with-capsman", false, "retrieves CAPSMan client information")
 	withConntrack = flag.Bool("with-conntrack", false, "retrieves connection tracking metrics")
 	withRoutes    = flag.Bool("with-routes", false, "retrieves routing table information")
 	withDHCP      = flag.Bool("with-dhcp", false, "retrieves DHCP server metrics")
@@ -197,6 +198,10 @@ func collectorOptions() []collector.Option {
 	if *withRoutes || cfg.Features.Routes {
 		opts = append(opts, collector.WithRoutes())
 	}
+
+        if *withCapsman || cfg.Features.Capsman {
+                opts = append(opts, collector.WithCapsman())
+        }
 
 	if *withDHCP || cfg.Features.DHCP {
 		opts = append(opts, collector.WithDHCP())
